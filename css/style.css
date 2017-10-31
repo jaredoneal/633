@@ -1,0 +1,44 @@
+h2 {
+    font-family: Karla;
+    text-align: center;
+}
+
+#section-one {
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    width: 600px;
+ background-color: white;
+    margin-left:150px;
+}
+
+#section-two {
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    width: 600px;
+	background-color: white;
+    margin-left:150px;
+}
+
+.wrapper {
+	margin: auto;
+	width: 900px;
+}
+
+.img-responsive {
+	width:100%;
+}
+
+footer {
+	text-align: center;
+}
+
+h1 {
+    font-family: Karla;
+    text-align: center;
+}
+
+p {
+	font-family: Karla;
+}

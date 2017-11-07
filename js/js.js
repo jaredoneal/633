@@ -1,14 +1,17 @@
 function MenuChoice(selection) {
-  document.getElementById("storeList").style.visibility = "hidden";
+  document.getElementById("customerList").style.visibility = "hidden";
   document.getElementById("orderHistory").style.visibility = "hidden";
+  document.getElementById("aboutUs").style.visibility = "hidden";
   switch (selection) {
-    case "storeList":
-      document.getElementById("storeList").style.visibility = "visible";
+    case "customerList":
+      document.getElementById("customerList").style.visibility = "visible";
       listStores();
       break;
     case "orderHistory":
       document.getElementById("orderHistory").style.visibility = "visible";
-      orderHistory();
+      break;
+    case "aboutUs":
+      document.getElementById("aboutUs").style.visibility = "visible";
       break;
     case "None": //No menu item selected, so no section should be displayed
       break;
@@ -19,11 +22,12 @@ function MenuChoice(selection) {
 
 function listStores() {
   var xmlhttp = new XMLHttpRequest();
-  var url = "https://student.business.uab.edu/jsonwebservice/service1.svc/";
+  var url =
+    "https://student.business.uab.edu/jsonwebservice/service1.svc/getAllCustomers";
 
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      var output = JSON.prase(xmlhttp.responseText);
+      var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
     }
   };
@@ -32,55 +36,100 @@ function listStores() {
   xmlhttp.send();
   function GenerateOutput(result) {
     var display =
-      "<table><tr><th>Store ID</th><th>Store Name</th><th>Store City</th></tr>";
+      "<table><tr><th>Customer ID</th><th>Customer Name</th><th>Customer City</th></tr>";
     var count = 0;
-    var storeName = "";
-    var storeID = "";
-    var storeCity = "";
-    for (count = 0; count < result.GetAllStoresResult.length; count++) {
-      storeID = result.GetAllStoresResult[count].StoreID;
-      storeName = '<a href="javascript:Orders(' + "'" + "')" + '">';
-      storeName += result.GetAllStoresResult[count].StoreName;
-      storeName += "</a>";
-      storeCity = result.GetAllStoresResult[count].StoreCity;
+    var CompanyName = "";
+    var CustomerID = "";
+    var City = "";
+    for (count = 0; count < result.GetAllCustomersResult.length; count++) {
+      CustomerID = result.GetAllCustomersResult[count].CustomerID;
+      CompanyName =
+        '<a href="javascript:OrdersWithParameters(' +
+        "'" +
+        CustomerID +
+        "');" +
+        '">';
+      CompanyName += result.GetAllCustomersResult[count].CompanyName;
+      CompanyName += "</a>";
+      City = result.GetAllCustomersResult[count].City;
       display +=
         "<tr><td>" +
-        storeID +
+        CustomerID +
         "</td><td>" +
-        storeName +
+        CompanyName +
         "</td><td>" +
-        storeCity +
+        City +
         "</td></tr>";
     }
     display += "</table>";
-    document.getElementById("listOfStores").innerHTML = display;
+    document.getElementById("listOfCustomers").innerHTML = display;
   }
 }
 
-function Orders(storeID)
-{
-    var xmlhttp = new XMLHttpRequest();
-    var url = "http://student.business.uab.edu/WebAppService/service1.svc/getOrderHistory/";
-    url += storeID;
+function Orders() {
+  var xmlhttp = new XMLHttpRequest();
+  var url =
+    "https://student.business.uab.edu/jsonwebservice/service1.svc/getCustomerOrderHistory/";
+  url += document.getElementById("CustomerIDInput").value;
 
-    xmlhttp.onreadystatechange = function() {
-        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            var output = JSON.parse(xmlhttp.responseText);
-            GenerateOutput(output);
-        }
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var output = JSON.parse(xmlhttp.responseText);
+      GenerateOutput(output);
     }
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
 
-    function GenerateOutput(result)
-    {
-        var display = "<table><tr><th>Book Name</th><th>Total Ordered</th></tr>";
-        var count = 0;
-        for(count = 0; count < result.length; count ++) {
-            display += "<tr><td>" + result[count].BookName + "</td><td>" + result[count].SaleNumber + "</td></tr>";
-        }
-        display += "</table">;
-        document.getElementById("books").innerHTML = display;
-        MenuChoice("orderHistory");
+  function GenerateOutput(result) {
+    var display = "<table><tr><th>Total</th><th>Product Name</th></tr>";
+    var count = 0;
+    for (count = 0; count < result.length; count++) {
+      display +=
+        "<tr><td>" +
+        result[count].Total +
+        "</td><td>" +
+        result[count].ProductName +
+        "</td></tr>";
     }
+    display += "</table>";
+    document.getElementById("orderReport").innerHTML = display;
+    // MenuChoice("orderHistory");
+  }
+}
+
+function OrdersWithParameters(CustomerID) {
+  var xmlhttp = new XMLHttpRequest();
+  var url =
+    "https://student.business.uab.edu/jsonwebservice/service1.svc/getCustomerOrderHistory/";
+  url += CustomerID;
+
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var output = JSON.parse(xmlhttp.responseText);
+      GenerateOutput(output);
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+  function GenerateOutput(result) {
+    var display = "<table><tr><th>Total</th><th>Product Name</th></tr>";
+    var count = 0;
+    for (count = 0; count < result.length; count++) {
+      display +=
+        "<tr><td>" +
+        result[count].Total +
+        "</td><td>" +
+        result[count].ProductName +
+        "</td></tr>";
+    }
+    display += "</table>";
+    document.getElementById("orderReport").innerHTML = display;
+    MenuChoice("orderHistory");
+  }
+}
+
+function BackToList() {
+  MenuChoice("customerList");
 }

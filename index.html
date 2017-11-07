@@ -14,15 +14,16 @@
         <section id="title">
             <select onchange="MenuChoice(value)" id="menu">
                 <option value="None">Please select an option.</option>
-                <option value="storeList">List Stores</option>
-                <option value="orderHistory">Store Order History</option>
+                <option value="customerList">List Customers</option>
+                <option value="orderHistory">Customer Order History</option>
+                <option value="aboutUs">About Us</option>
             </select>
         </section>
-        <section id="storeList">
+        <section id="customerList">
             <div>
-                <h2>Store List</h2>
-                <img class="img-responsive" src="https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e35/14240482_565906076934448_519167136_n.jpg">
-                <p id="listOfStores"></p>
+                <h2>Customer List</h2>
+                
+                <p id="listOfCustomers"></p>
             </div>
                         <footer>
                 <p>Jared O'Neal | oneal.jared@gmail.com</p>
@@ -31,9 +32,23 @@
         <section id="orderHistory">
             <div>
                 <h2>Store Order History</h2>
-                <img class="img-responsive" src="https://scontent-sjc2-1.cdninstagram.com/t51.2885-15/e15/11925554_636191249865593_47695288_n.jpg">
+                <input type="text" id="CustomerIDInput"></input>
+                <button onclick="Orders()">Submit</button>
+                <p id="orderReport"></p>
+                <button onclick="BackToList()">Back to List</button>
             </div>
             <footer>
+                <p>Jared O'Neal | oneal.jared@gmail.com</p>
+            </footer>
+        </section>
+        <section id="aboutUs">
+            <div>
+                <h2>About Us</h2>
+                <h3>Jared O'Neal</h3>
+                
+                <p>This is an appp built to test the functionality of Adobe PhoneGap.</p>
+            </div>
+                        <footer>
                 <p>Jared O'Neal | oneal.jared@gmail.com</p>
             </footer>
         </section>

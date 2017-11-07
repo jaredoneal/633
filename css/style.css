@@ -3,7 +3,7 @@ h2 {
     text-align: center;
 }
 
-#section-one {
+#orderHistory {
     visibility: hidden;
     position: absolute;
     height: auto;
@@ -12,7 +12,16 @@ h2 {
     margin-left:150px;
 }
 
-#section-two {
+#customerList {
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    width: 600px;
+	background-color: white;
+    margin-left:150px;
+}
+
+#aboutUs {
     visibility: hidden;
     position: absolute;
     height: auto;

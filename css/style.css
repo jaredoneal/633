@@ -28,7 +28,19 @@ h2 {
     width: 600px;
 	background-color: white;
     margin-left:150px;
+    vertical-align: middle;
 }
+
+#updateCustomerOrder{
+            visibility: hidden;
+        position: absolute;
+        height: auto;
+        width: 600px;
+        background-color: white;
+        margin-left:150px;
+        vertical-align: middle;
+    }
+
 
 .wrapper {
 	margin: auto;
@@ -50,4 +62,10 @@ h1 {
 
 p {
 	font-family: Karla;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

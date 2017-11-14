@@ -15,25 +15,26 @@
             <select onchange="MenuChoice(value)" id="menu">
                 <option value="None">Please select an option.</option>
                 <option value="customerList">List Customers</option>
-                <option value="orderHistory">Customer Order History</option>
+                <option value="customerOrders">Customer Current Orders</option>
+                <option value="updateCustomerOrder">Update Customer Order</option>
                 <option value="aboutUs">About Us</option>
             </select>
         </section>
         <section id="customerList">
             <div>
                 <h2>Customer List</h2>
-                
+
                 <p id="listOfCustomers"></p>
             </div>
-                        <footer>
+            <footer>
                 <p>Jared O'Neal | oneal.jared@gmail.com</p>
             </footer>
         </section>
         <section id="orderHistory">
             <div>
                 <h2>Store Order History</h2>
-                <input type="text" id="CustomerIDInput"></input>
-                <button onclick="Orders()">Submit</button>
+        
+            
                 <p id="orderReport"></p>
                 <button onclick="BackToList()">Back to List</button>
             </div>
@@ -41,20 +42,37 @@
                 <p>Jared O'Neal | oneal.jared@gmail.com</p>
             </footer>
         </section>
+        <section id="updateCustomerOrder">
+            <h3>Update Customer Order</h3>
+            <label>Order ID: </label>
+            <input type="text" id="orderID" disabled="true">
+            <br>
+            <label>Ship Name: </label>
+            <input type="text" id="shipName">
+            <br>
+            <label>Ship Address: </label>
+            <input type="text" id="shipAddress">
+            <br>
+            <label>Ship Post Code: </label>
+            <input type="text" id="shipPostCode">
+            <br>
+            <label>Ship City: </label>
+            <input type="text" id="shipCity">
+            <br><button onclick="customerUpdate()">Update Order Information</button>
+        </section>
         <section id="aboutUs">
             <div>
                 <h2>About Us</h2>
                 <h3>Jared O'Neal</h3>
-                
                 <p>This is an appp built to test the functionality of Adobe PhoneGap.</p>
             </div>
-                        <footer>
+            <footer>
                 <p>Jared O'Neal | oneal.jared@gmail.com</p>
             </footer>
         </section>
-                    <footer>
-                <p>Jared O'Neal | oneal.jared@gmail.com</p>
-            </footer>
+        <footer>
+            <p>Jared O'Neal | oneal.jared@gmail.com</p>
+        </footer>
     </div>
 </body>
 

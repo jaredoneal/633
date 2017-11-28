@@ -57,13 +57,13 @@ function listStores() {
     var City = "";
     for (count = 0; count < result.GetAllCustomersResult.length; count++) {
       CustomerID = result.GetAllCustomersResult[count].CustomerID;
-      // deleteButton =         '<a href="javascript:deleteCustomer(' +
-      //   "'" +
-      //   CustomerID +
-      //   "');" +
-      //   '">';
-      //   deleteButton += CustomerID;
-      //   deleteButton += "</a>";
+      deleteButton =         '<a href="javascript:deleteCustomer(' +
+        "'" +
+        CustomerID +
+        "');" +
+        '">';
+        deleteButton += CustomerID;
+        deleteButton += "</a>";
       CompanyName =
         '<a href="javascript:OrdersWithParameters(' +
         "'" +
@@ -80,8 +80,8 @@ function listStores() {
         CompanyName +
         "</td><td>" +
         City +
-        "</td><td>" +
-        `<button onclick="deleteCustomer(${CustomerID})">Delete Customer</button>` +
+        "</td><td>" + deleteButton +
+        // `<button onclick="deleteCustomer('${CustomerID}')">Delete Customer</button>` +
         "</td></tr>";
     }
     display += "</table>";

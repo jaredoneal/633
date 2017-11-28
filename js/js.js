@@ -62,7 +62,7 @@ function listStores() {
         CustomerID +
         "');" +
         '">' + "<button>Delete customer ";
-        // deleteButton += CustomerID;
+        deleteButton += CustomerID;
         deleteButton += "</a></button>";
       CompanyName =
         '<a href="javascript:OrdersWithParameters(' +
@@ -380,10 +380,10 @@ function deleteOperationResult(output) {
 }
 
 
-function Delete() {
-  var deleteConfirm = confirm("Delete this customer?");
+// function Delete() {
+//   var deleteConfirm = confirm("Delete this customer?");
 
-  if (deleteConfirm == true) {
-    DeleteStore();
-  }
-}
+//   if (deleteConfirm == true) {
+//     DeleteStore();
+//   }
+// }

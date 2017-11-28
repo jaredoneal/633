@@ -1,7 +1,7 @@
 function MenuChoice(selection) {
   document.getElementById("customerList").style.visibility = "hidden";
   document.getElementById("orderHistory").style.visibility = "hidden";
-  document.getElementById("addCustomer").style.visibility= "hidden";
+  document.getElementById("addCustomer").style.visibility = "hidden";
   document.getElementById("aboutUs").style.visibility = "hidden";
   document.getElementById("updateCustomerOrder").style.visibility = "hidden";
   switch (selection) {
@@ -15,7 +15,7 @@ function MenuChoice(selection) {
     case "aboutUs":
       document.getElementById("aboutUs").style.visibility = "visible";
       break;
-          case "addCustomer":
+    case "addCustomer":
       document.getElementById("addCustomer").style.visibility = "visible";
       break;
     case "customerOrders":
@@ -37,7 +37,7 @@ function listStores() {
   var url =
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getAllCustomers";
 
-  xmlhttp.onreadystatechange = function() {
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -57,13 +57,13 @@ function listStores() {
     var City = "";
     for (count = 0; count < result.GetAllCustomersResult.length; count++) {
       CustomerID = result.GetAllCustomersResult[count].CustomerID;
-      deleteButton =         '<a href="javascript:deleteCustomer(' +
-        "'" +
-        CustomerID +
-        "');" +
-        '">';
-        deleteButton += CustomerID;
-        deleteButton += "</a>";
+      // deleteButton =         '<a href="javascript:deleteCustomer(' +
+      //   "'" +
+      //   CustomerID +
+      //   "');" +
+      //   '">';
+      //   deleteButton += CustomerID;
+      //   deleteButton += "</a>";
       CompanyName =
         '<a href="javascript:OrdersWithParameters(' +
         "'" +
@@ -81,8 +81,8 @@ function listStores() {
         "</td><td>" +
         City +
         "</td><td>" +
-deleteButton +
-         "</td></tr>";
+        `<button onclick="deleteCustomer('${CustomerID}')">Delete Customer</button>` +
+        "</td></tr>";
     }
     display += "</table>";
     document.getElementById("listOfCustomers").innerHTML = display;
@@ -127,7 +127,7 @@ function Orders() {
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getOrdersForCustomer/";
   url += document.getElementById("CustomerIDInput").value;
 
-  xmlhttp.onreadystatechange = function() {
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -166,7 +166,7 @@ function OrdersWithParameters(CustomerID) {
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getOrdersForCustomer/";
   url += CustomerID;
 
-  xmlhttp.onreadystatechange = function() {
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -205,7 +205,7 @@ function OrdersWithParameters(CustomerID) {
 
 function getOrderInfo(
   orderID
-) 
+)
 //Retrieves a list of books ordered by a particular store using the store ID for the search
 {
   var xmlhttp = new XMLHttpRequest();
@@ -214,7 +214,7 @@ function getOrderInfo(
   //Service URL
   url += orderID;
   //Store ID to complete Service URL
-  xmlhttp.onreadystatechange = function() {
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -241,7 +241,7 @@ function getOrderInfo(
 
 function customerUpdate() {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var result = JSON.parse(xmlhttp.responseText);
       OperationResult(Number(result));
@@ -257,13 +257,13 @@ function customerUpdate() {
   var shipCity = document.getElementById("shipCity").value;
   var shipPostCode = document.getElementById("shipPostCode").value;
   var parameters =
-  JSON.stringify({
-    orderID,
-    shipName,
-    shipCity,
-    shipAddress,
-    shipPostCode
-  });
+    JSON.stringify({
+      orderID,
+      shipName,
+      shipCity,
+      shipAddress,
+      shipPostCode
+    });
   //Creates the JSON string to be sent for the update operation
   xmlhttp.open("POST", url, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -320,7 +320,7 @@ function addCustomer() {
     customerLocation +
     '"}';
 
-  ObjRequest.onreadystatechange = function() {
+  ObjRequest.onreadystatechange = function () {
     if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
       var addCustomerResult = JSON.parse(ObjRequest.responseText);
       addResult(addCustomerResult);
@@ -350,23 +350,24 @@ function addResult(output) {
 
 
 function deleteCustomer(customerID) {
-      var deleteConfirm = confirm("Delete this customer?");
-       if (deleteConfirm == true) {
-  var ObjRequest = new XMLHttpRequest();
-  var URL =
-     "https://student.business.uab.edu/jsonwebservice/service1.svc/DeleteCustomer/";
-   URL += customerID;
+  var deleteConfirm = confirm("Delete this customer?");
+  if (deleteConfirm == true) {
+    var ObjRequest = new XMLHttpRequest();
+    var URL =
+      "https://student.business.uab.edu/jsonwebservice/service1.svc/DeleteCustomer/";
+    URL += customerID;
 
-  ObjRequest.onreadystatechange = function() {
-    if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
-      var result = JSON.parse(ObjRequest.responseText);
-      deleteOperationResult(result);
-    }
-  };
+    ObjRequest.onreadystatechange = function () {
+      if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
+        var result = JSON.parse(ObjRequest.responseText);
+        deleteOperationResult(result);
+      }
+    };
 
-  ObjRequest.open("GET", URL, true);
-  ObjRequest.send();
-}}
+    ObjRequest.open("GET", URL, true);
+    ObjRequest.send();
+  }
+}
 
 function deleteOperationResult(output) {
   if (output.DeleteCustomerResult.WasSuccessful == 1) {
@@ -380,9 +381,9 @@ function deleteOperationResult(output) {
 
 
 function Delete() {
-    var deleteConfirm = confirm("Delete this customer?");
-  
-    if (deleteConfirm == true) {
-      DeleteStore();
-    }
+  var deleteConfirm = confirm("Delete this customer?");
+
+  if (deleteConfirm == true) {
+    DeleteStore();
   }
+}

@@ -81,7 +81,7 @@ function listStores() {
         "</td><td>" +
         City +
         "</td><td>" +
-        `<button onclick="deleteCustomer('${CustomerID}')">Delete Customer</button>` +
+        `<button onclick="deleteCustomer(${CustomerID})">Delete Customer</button>` +
         "</td></tr>";
     }
     display += "</table>";

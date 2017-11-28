@@ -1,6 +1,7 @@
 function MenuChoice(selection) {
   document.getElementById("customerList").style.visibility = "hidden";
   document.getElementById("orderHistory").style.visibility = "hidden";
+  document.getElementById("addCustomer").style.visibility= "hidden";
   document.getElementById("aboutUs").style.visibility = "hidden";
   document.getElementById("updateCustomerOrder").style.visibility = "hidden";
   switch (selection) {
@@ -13,6 +14,9 @@ function MenuChoice(selection) {
       break;
     case "aboutUs":
       document.getElementById("aboutUs").style.visibility = "visible";
+      break;
+          case "addCustomer":
+      document.getElementById("addCustomer").style.visibility = "visible";
       break;
     case "customerOrders":
       document.getElementById("customerOrders").style.visibility = "visible";
@@ -43,14 +47,23 @@ function listStores() {
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
   function GenerateOutput(result) {
+
     var display =
-      "<table><tr><th>Customer ID</th><th>Customer Name</th><th>Customer City</th></tr>";
+      "<table><tr><th>Customer ID</th><th>Customer Name</th><th>Customer City</th><th>Delete Customer</th></tr>";
     var count = 0;
+    var deleteButton = "";
     var CompanyName = "";
     var CustomerID = "";
     var City = "";
     for (count = 0; count < result.GetAllCustomersResult.length; count++) {
       CustomerID = result.GetAllCustomersResult[count].CustomerID;
+      deleteButton =         '<a href="javascript:deleteCustomer(' +
+        "'" +
+        CustomerID +
+        "');" +
+        '">';
+        deleteButton += CustomerID;
+        deleteButton += "</a>";
       CompanyName =
         '<a href="javascript:OrdersWithParameters(' +
         "'" +
@@ -67,7 +80,9 @@ function listStores() {
         CompanyName +
         "</td><td>" +
         City +
-        "</td></tr>";
+        "</td><td>" +
+deleteButton +
+         "</td></tr>";
     }
     display += "</table>";
     document.getElementById("listOfCustomers").innerHTML = display;
@@ -193,7 +208,6 @@ function getOrderInfo(
 ) 
 //Retrieves a list of books ordered by a particular store using the store ID for the search
 {
-  debugger
   var xmlhttp = new XMLHttpRequest();
   var url =
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getCustomerOrderInfo/";
@@ -283,3 +297,92 @@ function OperationResult(success, exception) {
 function BackToList() {
   MenuChoice("customerList");
 }
+
+function goToAddCustomer() {
+  MenuChoice("addCustomer");
+}
+
+function addCustomer() {
+  var ObjRequest = new XMLHttpRequest();
+  var URL =
+    "https://student.business.uab.edu/jsonwebservice/service1.svc/CreateCustomer";
+
+  var customerID = document.getElementById("addCustomerID").value;
+  var customerName = document.getElementById("addCustomerName").value;
+  var customerLocation = document.getElementById("addCustomerCity").value;
+
+  var addCustomer =
+    '{"CustomerID":"' +
+    customerID +
+    '","CompanyName":"' +
+    customerName +
+    '","City":"' +
+    customerLocation +
+    '"}';
+
+  ObjRequest.onreadystatechange = function() {
+    if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
+      var addCustomerResult = JSON.parse(ObjRequest.responseText);
+      addResult(addCustomerResult);
+    }
+  };
+
+  ObjRequest.open("POST", URL, true);
+  ObjRequest.setRequestHeader(
+    "Content-type",
+    "application/x-www-form-urlencoded"
+  );
+  ObjRequest.send(addCustomer);
+}
+
+
+function addResult(output) {
+  if (output.WasSuccessful == 1) {
+    alert("Success! Customer Added!");
+    BackToList();
+
+  } else {
+    document.getElementById("addCustomerResult").innerHTML =
+      "Sorry, but we encountered an error while executing that command:" +
+      output.Exception;
+  }
+}
+
+
+function deleteCustomer(customerID) {
+      var deleteConfirm = confirm("Delete this customer?");
+       if (deleteConfirm == true) {
+  var ObjRequest = new XMLHttpRequest();
+  var URL =
+     "https://student.business.uab.edu/jsonwebservice/service1.svc/DeleteCustomer/";
+   URL += customerID;
+
+  ObjRequest.onreadystatechange = function() {
+    if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
+      var result = JSON.parse(ObjRequest.responseText);
+      deleteOperationResult(result);
+    }
+  };
+
+  ObjRequest.open("GET", URL, true);
+  ObjRequest.send();
+}}
+
+function deleteOperationResult(output) {
+  if (output.DeleteCustomerResult.WasSuccessful == 1) {
+    alert("Deletion was successful!")
+  } else {
+    alert("We were not able to delete that store. See the error message below, try again, and contact our technical team if you continue to have issues." +
+      "<br><br>" +
+      output.Exception);
+  }
+}
+
+
+function Delete() {
+    var deleteConfirm = confirm("Delete this customer?");
+  
+    if (deleteConfirm == true) {
+      DeleteStore();
+    }
+  }

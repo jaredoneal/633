@@ -78,3 +78,8 @@ p {
     justify-content: center;
     align-items: center;
 }
+
+#displayTable a {
+	text-decoration: 	none;
+	color: black;
+}

@@ -49,7 +49,7 @@ function listStores() {
   function GenerateOutput(result) {
 
     var display =
-      "<table><tr><th>Customer ID</th><th>Customer Name</th><th>Customer City</th><th>Delete Customer</th></tr>";
+      "<table id='displayTable'><tr><th>Customer ID</th><th>Customer Name</th><th>Customer City</th><th>Delete Customer</th></tr>";
     var count = 0;
     var deleteButton = "";
     var CompanyName = "";
@@ -61,9 +61,9 @@ function listStores() {
         "'" +
         CustomerID +
         "');" +
-        '">';
-        deleteButton += CustomerID;
-        deleteButton += "</a>";
+        '">' + "<button>Delete customer ";
+        // deleteButton += CustomerID;
+        deleteButton += "</a></button>";
       CompanyName =
         '<a href="javascript:OrdersWithParameters(' +
         "'" +

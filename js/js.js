@@ -375,7 +375,6 @@ function deleteOperationResult(output) {
     alert("Deletion was successful!")
   } else {
     alert("We were not able to delete that store. See the error message below, try again, and contact our technical team if you continue to have issues." +
-      "<br><br>" +
       output.Exception);
   }
 }

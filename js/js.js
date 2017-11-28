@@ -367,6 +367,7 @@ function deleteCustomer(customerID) {
     ObjRequest.open("GET", URL, true);
     ObjRequest.send();
   }
+  listStores();
 }
 
 function deleteOperationResult(output) {

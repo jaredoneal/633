@@ -18,6 +18,7 @@
                 <option value="customerOrders">Customer Current Orders</option>
                 <option value="updateCustomerOrder">Update Customer Order</option>
                 <option value="aboutUs">About Us</option>
+                <option value="location">Geolocation</option>
             </select>
         </section>
         <section id="customerList">
@@ -33,8 +34,8 @@
         <section id="orderHistory">
             <div>
                 <h2>Store Order History</h2>
-        
-            
+
+
                 <p id="orderReport"></p>
                 <button onclick="BackToList()">Back to List</button>
             </div>
@@ -80,11 +81,24 @@
                 <p>Jared O'Neal | oneal.jared@gmail.com</p>
             </footer>
         </section>
+        <section id="location">
+            <h3>Geolocation Test</h3>
+            <hr>
+            <button onclick="Location()">Find Current Location</button>
+            <br><label>Latitude: </label>
+            <label id="latitude">Latitude Result</label>
+            <br><label>Longitude: </label>
+            <label id="longitude">Longitude Result</label>
+            <div id="map"></div>
+        </section>
         <footer>
             <p>Jared O'Neal | oneal.jared@gmail.com</p>
         </footer>
     </div>
     <script src="js/js.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6S5PpkmipJwe7uQ78h_Wp1RgXt140vlI&callback=initMap">
+  </script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ function MenuChoice(selection) {
   document.getElementById("orderHistory").style.visibility = "hidden";
   document.getElementById("addCustomer").style.visibility = "hidden";
   document.getElementById("aboutUs").style.visibility = "hidden";
+  document.getElementById("location").style.visibility = "hidden";
   document.getElementById("updateCustomerOrder").style.visibility = "hidden";
   switch (selection) {
     case "customerList":
@@ -25,6 +26,9 @@ function MenuChoice(selection) {
       document.getElementById("updateCustomerOrder").style.visibility =
         "visible";
       break;
+    case "location":
+      document.getElementById("location").style.visibility = "visible";
+      break;
     case "None": //No menu item selected, so no section should be displayed
       break;
     default:
@@ -37,7 +41,7 @@ function listStores() {
   var url =
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getAllCustomers";
 
-  xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -47,7 +51,6 @@ function listStores() {
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
   function GenerateOutput(result) {
-
     var display =
       "<table id='displayTable'><tr><th>Customer ID</th><th>Customer Name</th><th>Customer City</th><th>Delete Customer</th></tr>";
     var count = 0;
@@ -57,13 +60,15 @@ function listStores() {
     var City = "";
     for (count = 0; count < result.GetAllCustomersResult.length; count++) {
       CustomerID = result.GetAllCustomersResult[count].CustomerID;
-      deleteButton =         '<a href="javascript:deleteCustomer(' +
+      deleteButton =
+        '<a href="javascript:deleteCustomer(' +
         "'" +
         CustomerID +
         "');" +
-        '">' + "<button>Delete customer ";
-        deleteButton += CustomerID;
-        deleteButton += "</a></button>";
+        '">' +
+        "<button>Delete customer ";
+      deleteButton += CustomerID;
+      deleteButton += "</a></button>";
       CompanyName =
         '<a href="javascript:OrdersWithParameters(' +
         "'" +
@@ -80,7 +85,8 @@ function listStores() {
         CompanyName +
         "</td><td>" +
         City +
-        "</td><td>" + deleteButton +
+        "</td><td>" +
+        deleteButton +
         // `<button onclick="deleteCustomer('${CustomerID}')">Delete Customer</button>` +
         "</td></tr>";
     }
@@ -127,7 +133,7 @@ function Orders() {
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getOrdersForCustomer/";
   url += document.getElementById("CustomerIDInput").value;
 
-  xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -166,7 +172,7 @@ function OrdersWithParameters(CustomerID) {
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getOrdersForCustomer/";
   url += CustomerID;
 
-  xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -205,8 +211,7 @@ function OrdersWithParameters(CustomerID) {
 
 function getOrderInfo(
   orderID
-)
-//Retrieves a list of books ordered by a particular store using the store ID for the search
+) //Retrieves a list of books ordered by a particular store using the store ID for the search
 {
   var xmlhttp = new XMLHttpRequest();
   var url =
@@ -214,7 +219,7 @@ function getOrderInfo(
   //Service URL
   url += orderID;
   //Store ID to complete Service URL
-  xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var output = JSON.parse(xmlhttp.responseText);
       GenerateOutput(output);
@@ -222,8 +227,9 @@ function getOrderInfo(
   };
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
-  function GenerateOutput(result) //Function that displays results
-  {
+  function GenerateOutput(
+    result //Function that displays results
+  ) {
     result = result[0];
     var resultOrderID = result.OrderID;
     var resultShipAddress = result.ShipAddress;
@@ -241,7 +247,7 @@ function getOrderInfo(
 
 function customerUpdate() {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var result = JSON.parse(xmlhttp.responseText);
       OperationResult(Number(result));
@@ -256,14 +262,13 @@ function customerUpdate() {
   var shipAddress = document.getElementById("shipAddress").value;
   var shipCity = document.getElementById("shipCity").value;
   var shipPostCode = document.getElementById("shipPostCode").value;
-  var parameters =
-    JSON.stringify({
-      orderID,
-      shipName,
-      shipCity,
-      shipAddress,
-      shipPostCode
-    });
+  var parameters = JSON.stringify({
+    orderID,
+    shipName,
+    shipCity,
+    shipAddress,
+    shipPostCode
+  });
   //Creates the JSON string to be sent for the update operation
   xmlhttp.open("POST", url, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -320,7 +325,7 @@ function addCustomer() {
     customerLocation +
     '"}';
 
-  ObjRequest.onreadystatechange = function () {
+  ObjRequest.onreadystatechange = function() {
     if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
       var addCustomerResult = JSON.parse(ObjRequest.responseText);
       addResult(addCustomerResult);
@@ -335,19 +340,16 @@ function addCustomer() {
   ObjRequest.send(addCustomer);
 }
 
-
 function addResult(output) {
   if (output.WasSuccessful == 1) {
     alert("Success! Customer Added!");
     BackToList();
-
   } else {
     document.getElementById("addCustomerResult").innerHTML =
       "Sorry, but we encountered an error while executing that command:" +
       output.Exception;
   }
 }
-
 
 function deleteCustomer(customerID) {
   var deleteConfirm = confirm("Delete this customer?");
@@ -357,7 +359,7 @@ function deleteCustomer(customerID) {
       "https://student.business.uab.edu/jsonwebservice/service1.svc/DeleteCustomer/";
     URL += customerID;
 
-    ObjRequest.onreadystatechange = function () {
+    ObjRequest.onreadystatechange = function() {
       if (ObjRequest.readyState == 4 && ObjRequest.status == 200) {
         var result = JSON.parse(ObjRequest.responseText);
         deleteOperationResult(result);
@@ -372,13 +374,14 @@ function deleteCustomer(customerID) {
 
 function deleteOperationResult(output) {
   if (output.DeleteCustomerResult.WasSuccessful == 1) {
-    alert("Deletion was successful!")
+    alert("Deletion was successful!");
   } else {
-    alert("We were not able to delete that store. See the error message below, try again, and contact our technical team if you continue to have issues." +
-      output.Exception);
+    alert(
+      "We were not able to delete that store. See the error message below, try again, and contact our technical team if you continue to have issues." +
+        output.Exception
+    );
   }
 }
-
 
 // function Delete() {
 //   var deleteConfirm = confirm("Delete this customer?");
@@ -386,4 +389,50 @@ function deleteOperationResult(output) {
 //   if (deleteConfirm == true) {
 //     DeleteStore();
 //   }
+// }
+
+function Location() //Calls the Geolocation function built in to the web browser
+{
+  var geo = navigator.geolocation;
+  //References the Web Browser (navigator) geolocation service
+  if (geo) {
+    //Tests to see if geolocation service is available
+    geo.getCurrentPosition(showPosition);
+    //If the geolocation service is available it gets the position and calls a function to display it
+  } else {
+    alert("Geolocation is not supported");
+    //If the Geolocation service is not available it displays a message
+  }
+}
+function showPosition(
+  position //Function receives the geolocation data and displays it
+) {
+  var latitude = position.coords.latitude;
+  //Retrieves latitude
+  var longitude = position.coords.longitude;
+  //Retrieves longitude data
+  document.getElementById("latitude").innerHTML = latitude;
+  document.getElementById("longitude").innerHTML = longitude;
+
+  var location = {lat: latitude, lng: longitude};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 9,
+    center: location
+  });
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+}
+
+// function initMap() {
+//   var location = {lat: -25.363, lng: 131.044};
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 4,
+//     center: location
+//   });
+//   var marker = new google.maps.Marker({
+//     position: location,
+//     map: map
+//   });
 // }

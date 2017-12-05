@@ -40,6 +40,16 @@ h2 {
     vertical-align: middle;
 }
 
+#location {
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    width: 600px;
+	background-color: white;
+    margin-left:150px;
+    vertical-align: middle;
+}
+
 #updateCustomerOrder{
             visibility: hidden;
         position: absolute;
@@ -82,4 +92,10 @@ p {
 #displayTable a {
 	text-decoration: 	none;
 	color: black;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey; 
 }

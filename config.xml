@@ -20,7 +20,7 @@
 <splash src="splash.png" platform="android" qualifier="land-xxhdpi" />
 <splash src="splash.png" platform="android" qualifier="xxxhdpi" />
 <icon src="icon.png" platform="ios" width="180" height="180" />
-<icon platform="winphone" width="150" height="150" src="icon.jpg" />
-<icon src="icon.jpg" platform="winphone" />
+<icon platform="winphone" width="150" height="150" src="icon.png" />
+<icon src="icon.png" platform="winphone" />
 
 </widget>

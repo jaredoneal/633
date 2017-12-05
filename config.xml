@@ -8,7 +8,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />
     <plugin name="cordova-plugin-geolocation" spec="2.4.3" source="npm" />
-    <plugin name="cordova-plugin-splashscreen" source="npm">
+    <plugin name="cordova-plugin-splashscreen" source="npm" />
     <icon src="icon.png"/>
       <splash src="splash.png" />
     <splash src="splash.png" platform="android" qualifier="anydpi" />

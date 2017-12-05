@@ -20,7 +20,7 @@
 <splash src="splash.png" platform="android" qualifier="land-xxhdpi" />
 <splash src="splash.png" platform="android" qualifier="xxxhdpi" />
 <icon src="icon.png" platform="winphone" />
-<icon src="tileicon.png" platform="winphone" role="background" />
+<icon src="icon.png" platform="ios" width="180" height="180" />
 <icon platform="winphone" width="44"  height="44"  src="res/Square44x44Logo.scale-100.png" />
 <icon platform="winphone" width="106" height="106" src="res/Square44x44Logo.scale-240.png" />
 <icon platform="winphone" width="150" height="150" src="res/Square150x150Logo.scale-100.png" />

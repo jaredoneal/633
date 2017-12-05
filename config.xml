@@ -9,5 +9,5 @@
     <access origin="*" />
     <plugin name="cordova-plugin-geolocation" source="npm" />
     <icon src="icon.png"/>
-    <splash src="splash.JPG"/>
+    <splash src="splash.png"/>
 </widget>

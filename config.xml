@@ -8,7 +8,9 @@
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />
     <plugin name="cordova-plugin-geolocation" spec="2.4.3" source="npm" />
+    <plugin name="cordova-plugin-splashscreen">
     <icon src="icon.png"/>
+      <splash src="splash.png" />
     <splash src="splash.png" platform="android" qualifier="anydpi" />
 <splash src="splash.png" platform="android" qualifier="mdpi" />
 <splash src="splash.png" platform="android" qualifier="hdpi" />
@@ -17,4 +19,19 @@
 <splash src="splash.png" platform="android" qualifier="port-xxhdpi" />
 <splash src="splash.png" platform="android" qualifier="land-xxhdpi" />
 <splash src="splash.png" platform="android" qualifier="xxxhdpi" />
+<icon src="icon.png" platform="winphone" />
+<icon src="tileicon.png" platform="winphone" role="background" />
+<icon platform="winphone" width="44"  height="44"  src="res/Square44x44Logo.scale-100.png" />
+<icon platform="winphone" width="106" height="106" src="res/Square44x44Logo.scale-240.png" />
+<icon platform="winphone" width="150" height="150" src="res/Square150x150Logo.scale-100.png" />
+<icon platform="winphone" width="360" height="360" src="res/Square150x150Logo.scale-240.png" />
+<icon platform="winphone" width="71"  height="71"  src="res/Square71x71Logo.scale-100.png" />
+<icon platform="winphone" width="170" height="170" src="res/Square71x71Logo.scale-240.png" />
+<icon platform="winphone" width="310" height="150" src="res/Wide310x150Logo.scale-100.png" />
+<icon platform="winphone" width="744" height="360" src="res/Wide310x150Logo.scale-240.png" />
+<icon platform="winphone" width="70"  height="70"  src="res/Square70x70Logo.scale-100.png" />
+<icon platform="winphone" width="30"  height="30"  src="res/Square30x30Logo.scale-100.png" />
+<icon platform="winphone" width="310" height="310" src="res/Square310x310Logo.scale-100.png" />
+<icon platform="winphone" width="50"  height="50"  src="res/StoreLogo.scale-100.png" />
+<icon platform="winphone" width="120" height="120" src="res/StoreLogo.scale-240.png" />
 </widget>

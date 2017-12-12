@@ -4,7 +4,7 @@
     <name>Module 1</name>
     <description>Mobile App Module 1</description>
     <author>Jared O'Neal</author>
-    <preference name="phonegap-version" value="cli-7.0.1" />
+    <preference name="phonegap-version" value="cli-6.0.1" />
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />
     <plugin name="cordova-plugin-geolocation" spec="2.4.3" source="npm" />

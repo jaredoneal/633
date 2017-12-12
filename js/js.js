@@ -561,7 +561,7 @@ function PickContact() {
             "<br>";
         }
       }
-      document.getElementById("contactname").innerHTML += contactinfo;
+      document.getElementById("display").innerHTML += contactinfo;
     },
     function(err) {
       alert("Error: " + err);
@@ -587,7 +587,7 @@ function SearchContact() {
     var count = "";
     var table = document.createElement("table");
     table =
-      "<table border = 1><tr><th>Display Name</th><th>Phone Numbers</th/</tr>";
+      "<table><tr><th>Display Name</th><th>Phone Numbers</th/</tr>";
     for (var i = 0; i < contacts.length; i++) {
       var phone = "";
       var name = contacts[i].name.formatted;
@@ -599,9 +599,9 @@ function SearchContact() {
 
       table += "<tr><td>" + name + "</td><td>" + phone + "</td></tr>";
     }
-    document.getElementById("contactname").innerHTML += table;
+    document.getElementById("display").innerHTML += table;
   }
   function onError(contactError) {
-    alert("onError!");
+    alert("There was an error.");
   }
 }

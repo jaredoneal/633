@@ -446,7 +446,10 @@ function CapturePhoto() {
   navigator.camera.getPicture(onSuccess, onFail, {
     quality: 20,
     destinationtype: destinationtype.FILE_URI,
-    saveToPhotoAlbum: true
+    saveToPhotoAlbum: true,
+    sourceType: source,
+    targetWidth: 550,
+    targetHeight: 550
   });
 }
 

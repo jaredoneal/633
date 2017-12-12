@@ -533,7 +533,7 @@ function onFail(message) {
 //   );
 // }
 
-function ChooseContact() {
+function PickContact() {
   navigator.contacts.pickContact(
     function(contact) {
       var contactinfo = "";

@@ -102,13 +102,20 @@
             <br><br>
         </section>
         <section id="contacts">
-            <h2>Access Contacts</h2>
-            <br><button onclick="PickContact()">Pick A Contact</button>
+            <h2>Access Contacts</hr2>
+            <br><hr>
+            <button onclick="PickContact()">Choose A Contact</button>
+            <br>
+            <hr>
+            <label>Enter Contact Last Name:  </label>
+            <input type= "text" id= "contactlast" size="40" minlength= "1">
+            <br>
+            <button onclick="SearchContact()">Search Contacts</button>
             <br><br>
-            <label>Contact Last Name: </label>
-            <input type="text" id="contactname"></input>
-            <button onclick="Search()">Search for Contacts</button>
-        </section>
+            <label>Contact Name</label>
+            <label id="contactname"></label>
+            
+           </section>
         <footer>
             <p>Jared O'Neal | oneal.jared@gmail.com</p>
         </footer>

@@ -561,7 +561,7 @@ function PickContact() {
             "<br>";
         }
       }
-      document.getElementById("display").innerHTML += contactinfo;
+      document.getElementById("display").innerHTML = contactinfo;
     },
     function(err) {
       alert("Error: " + err);
@@ -599,7 +599,7 @@ function SearchContact() {
 
       table += "<tr><td>" + name + "</td><td>" + phone + "</td></tr>";
     }
-    document.getElementById("display").innerHTML += table;
+    document.getElementById("display").innerHTML = table;
   }
   function onError(contactError) {
     alert("There was an error.");

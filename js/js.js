@@ -4,6 +4,9 @@ function MenuChoice(selection) {
   document.getElementById("addCustomer").style.visibility = "hidden";
   document.getElementById("aboutUs").style.visibility = "hidden";
   document.getElementById("location").style.visibility = "hidden";
+  document.getElementById("contacts").style.visibility = "hidden";
+  document.getElementById("camera").style.visibility = "hidden";
+  
   document.getElementById("updateCustomerOrder").style.visibility = "hidden";
   switch (selection) {
     case "customerList":
@@ -566,7 +569,7 @@ function PickContact() {
   );
 }
 function SearchContact() {
-  var lastname = document.getElementById("contactlast").value;
+  var lastname = document.getElementById("contactname").value;
   var options = new ContactFindOptions();
   options.filter = lastname;
   options.multiple = true;

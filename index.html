@@ -103,24 +103,37 @@
         </section>
         <section id="contacts">
             <h2>Access Contacts</hr2>
-            <br><hr>
-            <button onclick="PickContact()">Choose A Contact</button>
-            <br>
-            <hr>
-            <label>Enter Contact Last Name:  </label>
-            <input type= "text" id= "contactlast" size="40" minlength= "1">
-            <br>
-            <button onclick="SearchContact()">Search Contacts</button>
-            <br><br>
-            <label>Contact Name</label>
-            <label id="contactname"></label>
-            
-           </section>
+                <br>
+                <hr>
+                <button onclick="PickContact()">Choose A Contact</button>
+                <br>
+                <hr>
+                <label>Enter Contact Last Name:  </label>
+                <input type="text" id="contactlast" size="40" minlength="1">
+                <br>
+                <button onclick="SearchContact()">Search Contacts</button>
+                <br><br>
+                <label>Contact Name</label>
+                <label id="contactname"></label>
+
+        </section>
         <footer>
             <p>Jared O'Neal | oneal.jared@gmail.com</p>
         </footer>
     </div>
     <script src="js/js.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script>
+        var objContact;
+         var picturesource;
+          var destinationtype; 
+          document.addEventListener("deviceready", onDeviceReady, false);
+           function onDeviceReady() { 
+               picturesource = navigator.camera.PictureSourceType;
+                destinationtype = navigator.camera.DestinationType;
+                 objContact = navigator.contacts.create(); 
+                }
+    </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6S5PpkmipJwe7uQ78h_Wp1RgXt140vlI&callback=initMap">
 
     </script>

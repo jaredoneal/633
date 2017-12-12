@@ -442,7 +442,7 @@ function showPosition(
 //   });
 // }
 
-function CapturePhoto() {
+function CapturePhoto(source) {
   navigator.camera.getPicture(onSuccess, onFail, {
     quality: 20,
     destinationtype: destinationtype.FILE_URI,
@@ -456,34 +456,92 @@ function CapturePhoto() {
 function onSuccess(imageURI) {
   var picdisplay = document.getElementById("snapshot");
   picdisplay.style.display = "block";
-  picdisplay.src = imageURI; //Assigns the picture to the image source property of the image on the web page
+  picdisplay.src = imageURI;
 }
-
 function onFail(message) {
   alert("Failed because: " + message);
 }
+//   navigator.camera.getPicture(onSuccess, onFail, {
+//     quality: 20,
+//     destinationtype: destinationtype.FILE_URI,
+//     saveToPhotoAlbum: true,
+//     sourceType: source,
+//     targetWidth: 550,
+//     targetHeight: 550
+//   });
+// }
 
-function PickContact() {
-  //The pickcontact method has two parameters.  The first parameter is the function that handles a successful contact
-  //selection, and the data is returned.  The second parameter is optional, and is called if no contact is returned.
-  //The contact information is returned as a JSON object, with arrays for certain items like phone numbers.
+// function onSuccess(imageURI) {
+//   var picdisplay = document.getElementById("snapshot");
+//   picdisplay.style.display = "block";
+//   picdisplay.src = imageURI; //Assigns the picture to the image source property of the image on the web page
+// }
+
+// function onFail(message) {
+//   alert("Failed because: " + message);
+// }
+
+// function PickContact() {
+//   //The pickcontact method has two parameters.  The first parameter is the function that handles a successful contact
+//   //selection, and the data is returned.  The second parameter is optional, and is called if no contact is returned.
+//   //The contact information is returned as a JSON object, with arrays for certain items like phone numbers.
+//   navigator.contacts.pickContact(
+//     function(
+//       contact
+//     ) //Function that operates when a contact is successfully returned
+//     {
+//       var contactinfo = "";
+//       contactinfo +=
+//         contact.name.givenName + " " + contact.name.familyName + "<br>";
+//       var count = 0;
+//       if (contact.phoneNumbers !== null) {
+//         //Checks for the presence of phone numbers
+//         for (
+//           count = 0;
+//           count < contact.phoneNumbers.length;
+//           count++
+//         ) //Retrieves all the phone numbers
+//         {
+//           contactinfo +=
+//             contact.phoneNumbers[count].type +
+//             ": " +
+//             contact.phoneNumbers[count].value +
+//             "<br>";
+//         }
+//       }
+//       if (contact.emails !== null) {
+//         //Checks for the presence of email addresses
+//         for (
+//           count = 0;
+//           count < contact.emails.length;
+//           count++
+//         ) //Retrieves all email addresses
+//         {
+//           contactinfo +=
+//             contact.emails[count].type +
+//             ": " +
+//             contact.emails[count].value +
+//             "<br>";
+//         }
+//       }
+//       document.getElementById("contactname").innerHTML = contactinfo;
+//     },
+//     function(err) //Function that operates when nothing is returned
+//     {
+//       alert("Error: " + err);
+//     }
+//   );
+// }
+
+function ChooseContact() {
   navigator.contacts.pickContact(
-    function(
-      contact
-    ) //Function that operates when a contact is successfully returned
-    {
+    function(contact) {
       var contactinfo = "";
       contactinfo +=
         contact.name.givenName + " " + contact.name.familyName + "<br>";
       var count = 0;
       if (contact.phoneNumbers !== null) {
-        //Checks for the presence of phone numbers
-        for (
-          count = 0;
-          count < contact.phoneNumbers.length;
-          count++
-        ) //Retrieves all the phone numbers
-        {
+        for (count = 0; count < contact.phoneNumbers.length; count++) {
           contactinfo +=
             contact.phoneNumbers[count].type +
             ": " +
@@ -492,13 +550,7 @@ function PickContact() {
         }
       }
       if (contact.emails !== null) {
-        //Checks for the presence of email addresses
-        for (
-          count = 0;
-          count < contact.emails.length;
-          count++
-        ) //Retrieves all email addresses
-        {
+        for (count = 0; count < contact.emails.length; count++) {
           contactinfo +=
             contact.emails[count].type +
             ": " +
@@ -508,9 +560,45 @@ function PickContact() {
       }
       document.getElementById("contactname").innerHTML = contactinfo;
     },
-    function(err) //Function that operates when nothing is returned
-    {
+    function(err) {
       alert("Error: " + err);
     }
   );
+}
+function SearchContact() {
+  var lastname = document.getElementById("contactlast").value;
+  var options = new ContactFindOptions();
+  options.filter = lastname;
+  options.multiple = true;
+  options.desiredFields = [
+    navigator.contacts.fieldType.displayName,
+    navigator.contacts.fieldType.name,
+    navigator.contacts.fieldType.phoneNumbers
+  ];
+  options.hasPhoneNumber = true;
+  var fields = [navigator.contacts.fieldType.displayName];
+  navigator.contacts.find(fields, onSuccess, onError, options);
+
+  function onSuccess(contacts) {
+    alert("Found " + contacts.length + " contacts.");
+    var count = "";
+    var table = document.createElement("table");
+    table =
+      "<table border = 1><tr><th>Display Name</th><th>Phone Numbers</th/</tr>";
+    for (var i = 0; i < contacts.length; i++) {
+      var phone = "";
+      var name = contacts[i].name.formatted;
+      if (contacts.phoneNumbers !== null) {
+        for (count = 0; count < contacts[i].phoneNumbers.length; count++) {
+          phone += contacts[i].phoneNumbers[count].value + ", ";
+        }
+      }
+
+      table += "<tr><td>" + name + "</td><td>" + phone + "</td></tr>";
+    }
+    document.getElementById("contactname").innerHTML = table;
+  }
+  function onError(contactError) {
+    alert("onError!");
+  }
 }

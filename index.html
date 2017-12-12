@@ -19,6 +19,8 @@
                 <option value="updateCustomerOrder">Update Customer Order</option>
                 <option value="aboutUs">About Us</option>
                 <option value="location">Geolocation</option>
+                <option value="camera">Camera</option>
+                <option value="contacts">Contacts</option>
             </select>
         </section>
         <section id="customerList">
@@ -91,14 +93,29 @@
             <label id="longitude">Longitude Result</label>
             <div id="map"></div>
         </section>
+        <section id="camera">
+            <h2>Take a Picture</h2>
+            <hr>
+            <button onclick="CapturePhoto()">Take Picture</button>
+            <br>
+            <img id="snapshot" src="" />
+            <br><br>
+        </section>
+        <section id="contacts">
+            <h2>Access Contacts</h2>
+            <br><button onclick="PickContact()">Pick A Contact</button>
+            <br><br>
+            <label>Contact Name: </label>
+            <label id="contactname"></label>
+        </section>
         <footer>
             <p>Jared O'Neal | oneal.jared@gmail.com</p>
         </footer>
     </div>
     <script src="js/js.js"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6S5PpkmipJwe7uQ78h_Wp1RgXt140vlI&callback=initMap">
-  </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6S5PpkmipJwe7uQ78h_Wp1RgXt140vlI&callback=initMap">
+
+    </script>
 </body>
 
 </html>

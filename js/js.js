@@ -26,6 +26,12 @@ function MenuChoice(selection) {
       document.getElementById("updateCustomerOrder").style.visibility =
         "visible";
       break;
+    case "contacts":
+      document.getElementById("contacts").style.visibility = "visible";
+      break;
+    case "camera":
+      document.getElementById("camera").style.visibility = "visible";
+      break;
     case "location":
       document.getElementById("location").style.visibility = "visible";
       break;
@@ -210,9 +216,8 @@ function OrdersWithParameters(CustomerID) {
 }
 
 function getOrderInfo(
-  orderID
-) //Retrieves a list of books ordered by a particular store using the store ID for the search
-{
+  orderID //Retrieves a list of books ordered by a particular store using the store ID for the search
+) {
   var xmlhttp = new XMLHttpRequest();
   var url =
     "https://student.business.uab.edu/jsonwebservice/service1.svc/getCustomerOrderInfo/";
@@ -391,8 +396,8 @@ function deleteOperationResult(output) {
 //   }
 // }
 
-function Location() //Calls the Geolocation function built in to the web browser
-{
+function Location() {
+  //Calls the Geolocation function built in to the web browser
   var geo = navigator.geolocation;
   //References the Web Browser (navigator) geolocation service
   if (geo) {
@@ -414,8 +419,8 @@ function showPosition(
   document.getElementById("latitude").innerHTML = latitude;
   document.getElementById("longitude").innerHTML = longitude;
 
-  var location = {lat: latitude, lng: longitude};
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var location = { lat: latitude, lng: longitude };
+  var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 9,
     center: location
   });
@@ -436,3 +441,73 @@ function showPosition(
 //     map: map
 //   });
 // }
+
+function CapturePhoto() {
+  navigator.camera.getPicture(onSuccess, onFail, {
+    quality: 20,
+    destinationtype: destinationtype.FILE_URI,
+    saveToPhotoAlbum: true
+  });
+}
+
+function onSuccess(imageURI) {
+  var picdisplay = document.getElementById("snapshot");
+  pickdisplay.style.display = "block";
+  pickdisplay.src = imageURI; //Assigns the picture to the image source property of the image on the web page
+}
+
+function onFail(message) {
+  alert("Failed because: " + message);
+}
+
+function PickContact() {
+  //The pickcontact method has two parameters.  The first parameter is the function that handles a successful contact
+  //selection, and the data is returned.  The second parameter is optional, and is called if no contact is returned.
+  //The contact information is returned as a JSON object, with arrays for certain items like phone numbers.
+  navigator.contacts.pickContact(
+    function(
+      contact
+    ) //Function that operates when a contact is successfully returned
+    {
+      var contactinfo = "";
+      contactinfo +=
+        contact.name.givenName + " " + contact.name.familyName + "<br>";
+      var count = 0;
+      if (contact.phoneNumbers !== null) {
+        //Checks for the presence of phone numbers
+        for (
+          count = 0;
+          count < contact.phoneNumbers.length;
+          count++
+        ) //Retrieves all the phone numbers
+        {
+          contactinfo +=
+            contact.phoneNumbers[count].type +
+            ": " +
+            contact.phoneNumbers[count].value +
+            "<br>";
+        }
+      }
+      if (contact.emails !== null) {
+        //Checks for the presence of email addresses
+        for (
+          count = 0;
+          count < contact.emails.length;
+          count++
+        ) //Retrieves all email addresses
+        {
+          contactinfo +=
+            contact.emails[count].type +
+            ": " +
+            contact.emails[count].value +
+            "<br>";
+        }
+      }
+      document.getElementById("contactname").innerHTML = contactinfo;
+    },
+    function(err) //Function that operates when nothing is returned
+    {
+      alert("Error: " + err);
+    }
+  );
+}

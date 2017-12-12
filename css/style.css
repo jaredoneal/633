@@ -40,6 +40,26 @@ h2 {
     vertical-align: middle;
 }
 
+#contacts {
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    width: 600px;
+	background-color: white;
+    margin-left:150px;
+    vertical-align: middle;
+}
+
+#camera {
+    visibility: hidden;
+    position: absolute;
+    height: auto;
+    width: 600px;
+	background-color: white;
+    margin-left:150px;
+    vertical-align: middle;
+}
+
 #location {
     visibility: hidden;
     position: absolute;

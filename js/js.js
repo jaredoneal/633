@@ -611,3 +611,7 @@ function onDeviceReady() {
     console.log(navigator.vibrate(3000));
 }
 
+function vibrate() {
+  navigator.vibrate(3000);
+}
+

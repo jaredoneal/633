@@ -6,7 +6,7 @@ function MenuChoice(selection) {
   document.getElementById("location").style.visibility = "hidden";
   document.getElementById("contacts").style.visibility = "hidden";
   document.getElementById("camera").style.visibility = "hidden";
-  
+  document.getElementById("vibrate").style.visibility = "hidden";
   document.getElementById("updateCustomerOrder").style.visibility = "hidden";
   switch (selection) {
     case "customerList":
@@ -37,6 +37,9 @@ function MenuChoice(selection) {
       break;
     case "location":
       document.getElementById("location").style.visibility = "visible";
+      break;
+      case "vibrate":
+      document.getElementById("vibrate").style.visibility = "visible";
       break;
     case "None": //No menu item selected, so no section should be displayed
       break;
@@ -608,10 +611,22 @@ function SearchContact() {
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
-    console.log(navigator.vibrate(3000));
+    console.log(navigator.vibrate(2000));
 }
 
 function vibrate() {
-  navigator.vibrate(3000);
+  navigator.vibrate(2000);
 }
 
+window.addEventListener("batterystatus", onBatteryStatus, false);
+
+function onBatteryStatus(status) {
+    console.log("Level: " + status.level + " isPlugged: " + status.isPlugged);
+}
+
+function batteryStatus(status) {
+  var level = status.level
+  var isPlugged = status.isPlugged;
+  document.getElementById("batteryStatus").innerhtml = level;
+  document.getElementById("batteryStatus").innerhtml += isPlugged;
+}

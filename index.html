@@ -21,6 +21,7 @@
                 <option value="location">Geolocation</option>
                 <option value="camera">Camera</option>
                 <option value="contacts">Contacts</option>
+                <option value="vibrate">Vibrate</option>
             </select>
         </section>
         <section id="customerList">
@@ -100,10 +101,9 @@
             <br>
             <img id="snapshot" src="" />
             <br><br>
-            <button onclick="vibrate()">VIBRATE</button>
+        
         </section>
         <section id="contacts">
-        <button onclick="vibrate()">VIBRATE</button>
             <h2>Access Contacts</hr2>
                 <br>
                 <hr>
@@ -118,6 +118,13 @@
                 <label>Contact Information: </label>
                 <label id="display"></label>
 
+        </section>
+        <section id="vibrate">
+        <h2>Vibrate Section</h2>
+        <button onclick="vibrate()">VIBRATE</button>
+        <p>Button will vibrate phone for two seconds. Phone should also vibrate for two seconds during app launch.</p>
+        <button onclick="batteryStatus()">BATTERY STATUS</button>
+        <label id="batteryStatus">
         </section>
         <footer>
             <p>Jared O'Neal | oneal.jared@gmail.com</p>

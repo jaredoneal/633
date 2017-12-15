@@ -629,4 +629,6 @@ function batteryStatus(status) {
   var isPlugged = status.isPlugged;
   document.getElementById("batteryStatus").innerhtml = level;
   document.getElementById("batteryStatus").innerhtml += isPlugged;
+      console.log("Level: " + status.level + " isPlugged: " + status.isPlugged);
+
 }

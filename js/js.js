@@ -7,6 +7,7 @@ function MenuChoice(selection) {
   document.getElementById("contacts").style.visibility = "hidden";
   document.getElementById("camera").style.visibility = "hidden";
   document.getElementById("vibrate").style.visibility = "hidden";
+  document.getElementById("network").style.visibility = "hidden";
   document.getElementById("updateCustomerOrder").style.visibility = "hidden";
   switch (selection) {
     case "customerList":
@@ -40,6 +41,9 @@ function MenuChoice(selection) {
       break;
       case "vibrate":
       document.getElementById("vibrate").style.visibility = "visible";
+      break;
+      case "network":
+      document.getElementById("network").style.visibility = "visible";
       break;
     case "None": //No menu item selected, so no section should be displayed
       break;

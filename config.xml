@@ -12,7 +12,7 @@
     <plugin name="cordova-plugin-camera" source="npm" spec="2.4.1"/>
     <plugin name="cordova-plugin-contacts" source="npm" spec="2.3.1" />
     <plugin name="cordova-plugin-vibration" source="npm" />
-    <plugin name="cordova-plugin-battery-status" source="npm" />
+    <plugin name="cordova-plugin-network-information" source="npm" />
     <icon src="icon.png"/>
       <splash src="splash.png" />
     <splash src="splash.png" platform="android" qualifier="anydpi" />
